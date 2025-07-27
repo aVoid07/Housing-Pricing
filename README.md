@@ -1,97 +1,83 @@
-# Credit-Card-Financial-Fraud-Detection
+**Housing Price Prediction - End-to-End Machine Learning Project**
+This repository contains a full-fledged ML project built on the California Housing Dataset. The notebook demonstrates the complete pipeline from data ingestion to model deployment readiness.
 
-A comprehensive machine learning project that detects fraudulent credit card transactions using both supervised and unsupervised approaches, optimized for imbalanced classification problems. Built using Python and real-world credit card transaction data.
+**Objective**
+To predict median house values in Californian districts using various attributes such as population, median income, proximity to the ocean, etc.
 
----
+**Workflow Overview**
 
-## 📌 Table of Contents
-- [About the Project](#about-the-project)
-- [Problem Statement](#problem-statement)
-- [Dataset](#dataset)
-- [Methodology](#methodology)
-- [Models Implemented](#models-implemented)
-- [Performance Comparison](#performance-comparison)
-- [Project Highlights](#project-highlights)
-- [How to Run](#how-to-run)
-- [Future Work](#future-work)
+1.  Data Acquisition & Loading
+Dataset is fetched programmatically from an online repository.
+Loaded using pandas into a DataFrame and explored for basic insights.
 
----
+2.  Test-Train Split with Stable Hashing
+Created a deterministic test set using a hashing technique for reproducibility.
+Latitude and longitude are combined to generate a unique ID per row.
 
-## About the Project
+3.  Exploratory Data Analysis (EDA)
+Used histograms, scatter plots, and correlation matrices to understand data distribution.
+Geographic data visualized using scatter plots with alpha, c, and s attributes for better insights.
 
-Credit card fraud detection is a classic case of **highly imbalanced classification**, where fraudulent cases represent less than 0.2% of all transactions. This project implements a variety of machine learning models and techniques to deal with the skewed data and maximize the detection of frauds while minimizing false positives.
+4.  Data Cleaning & Feature Engineering
+Imputed missing values with median strategy.
+Created new features such as:
+rooms_per_household
+bedrooms_per_room
+population_per_household
 
----
+5.  Pipeline Construction
+Used Pipeline and ColumnTransformer to:
+Handle numerical features (imputation + scaling).
+One-hot encode categorical features (ocean_proximity).
 
-## Problem Statement
+6.  Model Training & Evaluation
+Trained and evaluated:
+Linear Regression
+Decision Tree Regressor
+Random Forest Regressor
+Used cross_val_score and RMSE to evaluate performance.
+Fine-tuned models using GridSearchCV.
 
-> Build a robust, interpretable machine learning model that can accurately identify fraudulent credit card transactions in a highly imbalanced dataset — with an emphasis on maximizing recall and F1-score for the fraud class.
+**Tools & Libraries Used**
+Python 3.x
+NumPy, Pandas
+Matplotlib, Seaborn
+Scikit-learn
 
----
+Getting Started
+1. Clone the Repository
+bash
+Copy
+Edit
+git clone https://github.com/your-username/housing-ml-project.git
+cd housing-ml-project
+2. Install Dependencies
+bash
+Copy
+Edit
+pip install -r requirements.txt
+3. Launch the Notebook
+bash
+Copy
+Edit
+jupyter notebook "Housing - A Complete Project.ipynb"
+📂 Repository Structure
+cpp
+Copy
+Edit
+.
+├── Housing - A Complete Project.ipynb
+├── README.md
+└── requirements.txt (optional, can be generated)
+📈 Sample Outputs
+Feature importances plotted.
 
-## Dataset
+RMSE scores for each model compared.
 
-- **Source**: [Kaggle - Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
-- **Size**: ~284,000 transactions
-- **Features**: PCA-transformed components `V1` to `V28`, `Time`, `Amount`, and `Class` (0: normal, 1: fraud)
-- **Challenge**: Class imbalance — frauds are ~0.17% of total data
+Top hyperparameter combinations listed from GridSearchCV.
 
----
+Author
+Videh Jha
 
-## Methodology
-
-- **Data Exploration** and class imbalance analysis
-- **Data Scaling** using `StandardScaler`
-- **Train-Test Split** with stratified sampling to preserve class distribution
-- **Imbalance Handling** using:
-  - SMOTE (Synthetic Minority Oversampling Technique)
-  - `class_weight='balanced'` for tree-based models
-- **Anomaly Detection** using Gaussian distribution modeling
-- **Threshold Tuning** using F1-score optimization
-
----
-
-## Models Implemented
-
-### Supervised:
-- **Logistic Regression**
-  - With and without SMOTE
-- **Random Forest**
-  - With `class_weight='balanced'`
-- **XGBoost**
-  - Hyperparameter tuned with `GridSearchCV`
-  - Trained on SMOTE-balanced data
-
-### Unsupervised:
-- **Gaussian Anomaly Detection**
-  - Trained only on genuine transactions
-  - Evaluated on balanced fraud/genuine validation and test sets
-
----
-
-## Performance Comparison (Class 1 - Fraud)
-
-| Model                            | Precision | Recall | F1-Score |
-|----------------------------------|-----------|--------|----------|
-| Gaussian Anomaly Detection       | 1.0000    | 0.0569 | 0.1077   |
-| XGBoost (SMOTE + GridSearchCV)   | 0.2800    | 0.8700 | 0.4300   |
-| Random Forest (class_weight)     | 0.9300    | 0.7900 | 0.8600   |
-| Logistic Regression + SMOTE      | 0.0517    | 0.8721 | 0.0975   |
-| Logistic Regression (no SMOTE)   | 0.6392    | 0.7209 | 0.6776   |
-| Linear Regression (binary use)   | 0.8462    | 0.4064 | 0.5491   |
-
-> 📌 **Best model overall**: Random Forest with `class_weight='balanced'`  
-> 📌 **Best recall**: Logistic Regression + SMOTE  
-> 📌 **Most conservative**: Gaussian Anomaly Detector (high precision, low recall)
-
----
-
-## Project Highlights
-
-- ✅ Tackles **severe class imbalance** using SMOTE and cost-sensitive learning
-- ✅ Implements **GridSearchCV** to tune XGBoost hyperparameters
-- ✅ Evaluates **unsupervised anomaly detection** using Gaussian distribution
-- ✅ Uses **threshold tuning** to further optimize F1-score
-- ✅ Rich performance metrics: **Confusion Matrix**, **ROC**, **Precision-Recall Curve**
-
----
+📄 License
+This project is licensed under the MIT License.
