@@ -1,7 +1,3 @@
-Certainly! Here's a **clean, professional version** of your Housing Price Prediction README without emojis, ideal for GitHub, internship portfolios, or formal submissions:
-
----
-
 # Housing Price Prediction – End-to-End Machine Learning Project
 
 This repository contains a comprehensive machine learning project built using the California Housing dataset. It demonstrates the complete ML lifecycle — from data acquisition and exploration to model training, evaluation, and deployment readiness.
